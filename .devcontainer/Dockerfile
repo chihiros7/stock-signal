@@ -3,7 +3,12 @@ FROM mcr.microsoft.com/devcontainers/python:1-3.12-bookworm
 USER root
 
 # Git and curl are used by Codex CLI and project tooling.
-RUN apt-get update \
+# The base image includes an optional Yarn APT source with an unavailable signing key.
+# Codex is installed with npm, so disable only that source before apt updates.
+RUN set -eux; \
+    grep -l 'dl.yarnpkg.com' /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources 2>/dev/null \
+      | xargs -r rm -f; \
+    apt-get update \
     && apt-get install -y --no-install-recommends \
        ca-certificates curl git \
     && rm -rf /var/lib/apt/lists/*
