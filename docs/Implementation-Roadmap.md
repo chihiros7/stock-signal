@@ -31,7 +31,7 @@ flowchart LR
 | 3 | CSVに氏名・口座番号が含まれるか | **未確認**。含む場合は最小化CSVへの置換を検討 |
 | 4 | 株価取得元 | **未決**。yfinance案、J-Quantsの無料プラン・遅延・制約を調査 |
 | 5 | 持ち主がBotの権限を外せるか | **要検証**。Discordの実権限でテスト |
-| 6 | 非公開リポジトリのActions定期実行停止条件 | **要確認**。60日無活動ルールの適用範囲を確認 |
+| 6 | 公開リポジトリのActions定期実行停止への対応 | 60日間活動がないとスケジュール実行が自動無効化される。状態確認・再有効化の運用手順を用意（[公式仕様](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)） |
 | 7 | actions/checkout・actions/setup-pythonのバージョン | **実装時に公式確認** |
 
 ### 追加で実装時に確定すること

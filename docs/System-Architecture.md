@@ -10,7 +10,7 @@ flowchart TB
     A["#Aさん<br/>本人・Bot・許可した閲覧者"]
     B["#Bさん<br/>本人・Bot・許可した閲覧者"]
   end
-  subgraph GitHub["GitHub（個人の非公開リポジトリ）"]
+  subgraph GitHub["GitHub（個人の公開リポジトリ）"]
     W["Actions<br/>cron / workflow_dispatch"]
     X["Secrets<br/>BOT_TOKEN / CHANNEL_OWNERS"]
     C["Pythonソースコード"]
