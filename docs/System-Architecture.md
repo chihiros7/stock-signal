@@ -1,0 +1,65 @@
+# システム構成
+
+[← Home](Home.md) ｜ [処理フロー](Processing-Flow.md)
+
+## 本番構成（決定済みの基本方針）
+
+```mermaid
+flowchart TB
+  subgraph Discord["Discordサーバー：ポートフォリオ共有"]
+    A["#Aさん<br/>本人・Bot・許可した閲覧者"]
+    B["#Bさん<br/>本人・Bot・許可した閲覧者"]
+  end
+  subgraph GitHub["GitHub（個人の非公開リポジトリ）"]
+    W["Actions<br/>cron / workflow_dispatch"]
+    X["Secrets<br/>BOT_TOKEN / CHANNEL_OWNERS"]
+    C["Pythonソースコード"]
+  end
+  M["株価データ提供元<br/>yfinance案／J-Quants要調査"]
+  W -->|"起動"| C
+  X -.->|"実行時に注入"| C
+  C <-->|"Discord REST API：履歴・添付・通知・削除"| A
+  C <-->|"同上"| B
+  C -->|"当日終値・前日終値"| M
+```
+
+- 常時稼働Botや独立したサーバー、データベースは初期段階では用いません。
+- Actionsの実行中だけBotトークンを使い、各チャンネルのメッセージ履歴を参照します。
+- チャンネルと所有者の対応表はSecretsに置き、**メッセージ投稿者IDと照合**します。
+- CSV本体はDiscordの添付として保持し、GitHubのリポジトリやActionsのログには保存しません。
+- 株価提供元は未決です。無料の非公式データ取得（yfinance）は停止・遅延・利用条件変更のリスクがあります。
+
+## チャンネルとCSVの関係
+
+```mermaid
+flowchart LR
+  UA["Aさん"] -->|"AさんがCSVを投稿"| CA["#Aさん"]
+  UB["Bさん"] -->|"BさんがCSVを投稿"| CB["#Bさん"]
+  BOT["Bot"] -->|"所有者IDを確認"| CA
+  BOT -->|"所有者IDを確認"| CB
+  OTHER["他の閲覧者"] -.->|"CSV投稿は不採用"| CA
+```
+
+### 論理コンポーネント（実装案）
+
+| コンポーネント | 責務 |
+| --- | --- |
+| Discord APIクライアント | メッセージ一覧・添付取得・Embed送信・古いCSV削除 |
+| チャンネル処理 | CHANNEL_OWNERSの検証、投稿者の照合 |
+| CSVパーサー | 証券会社判定、形式検証、銘柄×口座単位への変換 |
+| 株価取得 | 株価・前日終値の取得、欠損・失敗の扱い |
+| 評価・集計 | 評価額、前日比、含み損益の計算 |
+| 通知生成 | チャンネルごとのEmbed生成、文字数制限への対応 |
+| 実行制御 | 取引日判定、DRY_RUN、ログの秘匿 |
+
+## 初期段階で採用しないもの
+
+- Webhookのみの通知（CSVを読めない）。
+- 常時起動するRender / Heroku / Fly.io / Railway等のサーバー。
+- カード登録が必要なクラウドサービス。
+- Firebaseなどの外部DB。
+- CSVをGitHubにコミットする運用、またはCSV本体をGitHub Secretsへ保存する運用。
+
+## 重要な設計上の論点
+
+最新CSVが不正な場合「前のCSVで通知を続ける」には、**過去の正常CSVを探索して再検証する処理**などが必要です。どこまで遡るか、失敗を何度通知するかは実装時に確定します。Discord添付の可用性にも依存します。
