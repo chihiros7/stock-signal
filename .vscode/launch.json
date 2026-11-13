@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug stock-signal (dry run)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "stock_signal",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "env": {
+        "DRY_RUN": "true"
+      }
+    },
+    {
+      "name": "Debug pytest",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "-v",
+        "-s"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
