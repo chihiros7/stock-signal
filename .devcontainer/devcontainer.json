@@ -1,0 +1,27 @@
+{
+  "name": "stock-signal-dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=stock-signal-codex-home,target=/home/vscode/.codex,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.debugpy",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false
+      }
+    }
+  },
+  "postCreateCommand": "python -m pip install --user -r requirements-dev.txt"
+}
