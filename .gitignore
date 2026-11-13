@@ -1,0 +1,28 @@
+# Secrets and personal portfolio data
+.env
+.env.*
+!.env.example
+*.csv
+*.CSV
+.codex/
+.auth/
+secrets/
+credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/launch.json
