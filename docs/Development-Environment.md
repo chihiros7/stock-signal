@@ -6,7 +6,7 @@
 
 ## 目標
 
-Windows上のWSL2 Ubuntuにリポジトリを配置し、Docker Dev Containerの中でPython・pytest・debugpy・Codex CLIを使います。VS Codeからコンテナへ接続してブレークポイントでデバッグします。本番GitHub Actionsはコンテナを常駐させず、UbuntuランナーでPythonを直接実行します。
+Windows上のWSL2 Ubuntuにリポジトリを配置し、Docker Dev Containerの中でPython・pytest・debugpy・Codex CLIを使います。VS Codeからコンテナへ接続してブレークポイントでデバッグします。本番GitHub Actionsはコンテナを常駐させず、UbuntuランナーでPythonを直接実行します。`/登録` の即時応答受付と非公開台帳は別に追加する計画です（[登録設計](Registration-Design.md)）。ローカルでは署名検証・Discord作成・台帳をモックし、選定後に受付基盤の開発環境を追加します。
 
 ```mermaid
 flowchart TB

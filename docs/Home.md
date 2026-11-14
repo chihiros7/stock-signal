@@ -13,7 +13,7 @@
 - クレジットカード登録なし・継続費用ゼロを目標にする（達成可否は最新条件で要確認）。
 - CSVや保有資産情報をGitHubにコミットしない。ログにも出さない。
 - 各チャンネルの閲覧範囲は利用者本人が設定する。ただし管理者とDiscord事業者によるアクセスの制約は明示する。
-- 最初はCSV添付と日次通知に絞り、対話的な編集コマンドは第2段階にする。
+- 初期リリースは利用者自身の `/登録`・CSV添付・日次通知を提供し、対話的な編集コマンドは第2段階にする。
 
 ## システム概要
 
@@ -31,6 +31,7 @@ flowchart LR
 
 | ページ | 内容 |
 | --- | --- |
+| [Registration-Design](Registration-Design.md) | `/登録` による専用チャンネル作成・登録台帳 |
 | [System-Architecture](System-Architecture.md) | システム構成・責務・データ境界 |
 | [Development-Environment](Development-Environment.md) | WSL2 / Ubuntu / Docker / Codex / VS Code |
 | [Processing-Flow](Processing-Flow.md) | CSV検証、計算、通知、削除の処理フロー |
@@ -40,8 +41,8 @@ flowchart LR
 
 ## 決定済みと未決の区別
 
-**決定済み：** Discordのチャンネル単位で管理／平日16:30 JSTにActionsで実行／Discord REST API／成功時だけ旧CSVを削除／通知履歴を保持／利用者本人のCSVのみを受理。
+**決定済み：** 利用者自身の `/登録` で非公開チャンネルと所有者登録を自動設定／ Discordのチャンネル単位で管理／平日16:30 JSTにActionsで実行／Discord REST API／成功時だけ旧CSVを削除／通知履歴を保持／利用者本人のCSVのみを受理。
 
 **未決・要検証：** 楽天・SBIのCSV実形式、日本株以外の扱い、個人情報の含有、株価API、Discord権限の実効性、Actionsの現行無料枠・スケジュール停止条件。
 
-> **注意：** GitHub Actions Secretsには認証情報とチャンネルID・所有者IDの対応表を置きます。CSV本体は置きません。
+> **注意：** 認証情報はSecrets、チャンネルID・所有者IDの対応は自動更新する非公開登録台帳、CSV本体はDiscordに保存します。即時応答と台帳の構成案は [Registration-Design](Registration-Design.md) を参照してください。

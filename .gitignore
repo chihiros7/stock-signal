@@ -8,6 +8,7 @@
 .auth/
 secrets/
 credentials.json
+/tmp/
 
 # Python
 __pycache__/

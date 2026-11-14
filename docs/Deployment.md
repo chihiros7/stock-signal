@@ -13,12 +13,17 @@
 - GitHub Actionsのcronは遅延する可能性があり、厳密な16:30到着は保証しません。
 - 日本の祝日だけでなく、**東証の実際の休場日**を考慮する仕組みが必要です。休日判定ライブラリは未決。
 
+## 登録受付の構成変更
+
+利用者自身の `/登録` を初期リリースに追加します。即時応答受付と非公開登録台帳（Workers + D1候補）を別途用意し、日次Actionsは認証付きの読み取り専用APIから有効な登録を取得します。`CHANNEL_OWNERS` の手動更新は廃止する設計です。受付・台帳を先にテストし、利用者追加時のGitHub設定変更を不要にします。料金・カード要否・実装方式は導入前に検証します。詳細は [登録設計](Registration-Design.md) を参照してください。
+
 ## スケジュール構成
 
 ```mermaid
 sequenceDiagram
   participant S as GitHub Scheduler
   participant A as Actions Ubuntu
+  participant R as 登録台帳API
   participant D as Discord REST API
   participant Q as 株価取得先
   S->>A: 平日 07:30 UTC（16:30 JST）
@@ -26,6 +31,8 @@ sequenceDiagram
   alt 休場日
     A-->>S: 正常終了（通知なし）
   else 取引日
+    A->>R: 認証付きで有効な登録を取得
+    R-->>A: チャンネルと所有者（出力禁止）
     loop チャンネルごと
       A->>D: 本人の最新CSV取得
       D-->>A: 添付・メッセージ情報
