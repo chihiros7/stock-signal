@@ -1,3 +1,6 @@
 # Development-only dependencies. Runtime dependencies will be added as features are implemented.
-pytest>=8,<10
-debugpy>=1.8,<2
+pytest==9.2.0
+debugpy==1.8.22
+ruff==0.17.5
+pytest-cov==7.1.0
+pytest-socket==0.8.1

@@ -2,7 +2,7 @@
 
 [← Home](Home.md) ｜ [ロードマップ](Implementation-Roadmap.md)
 
-> **状態：提案構成。まだファイルの実装・動作確認は行っていません。**
+> **状態：開発環境ファイルは実装済み。コンテナ内のPython・Codex・debugpy・pytestを確認済み。VS Code上のブレークポイント動作は手動確認が残ります。**
 
 ## 目標
 

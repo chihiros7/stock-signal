@@ -1,0 +1,18 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--disable-socket --tb=short"
+
+[tool.ruff]
+target-version = "py312"
+extend-exclude = ["tmp"]
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B"]
+
+[tool.coverage.run]
+source = ["stock_signal"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true

@@ -1,6 +1,6 @@
 # stock-signal — 持ち株通知Bot
 
-> **状態：設計段階（コード未実装）**  
+> **状態：開発中。開発環境・CI・円建て評価計算を実装済み。本番連携は未実装。**
 > 本ドキュメントは2026-11-14時点で提示された設計メモを整理したものです。無料枠、サービス仕様、API制約は実装前に公式情報で再確認します。
 
 ## 目的
@@ -32,6 +32,7 @@ flowchart LR
 | ページ | 内容 |
 | --- | --- |
 | [Registration-Design](Registration-Design.md) | `/登録` による専用チャンネル作成・登録台帳 |
+| [Testing-and-CI](Testing-and-CI.md) | 自動テスト・CI/CDの段階的導入 |
 | [System-Architecture](System-Architecture.md) | システム構成・責務・データ境界 |
 | [Development-Environment](Development-Environment.md) | WSL2 / Ubuntu / Docker / Codex / VS Code |
 | [Processing-Flow](Processing-Flow.md) | CSV検証、計算、通知、削除の処理フロー |

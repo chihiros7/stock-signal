@@ -1,4 +1,5 @@
 """Environment smoke tests; no real Discord requests are sent."""
+
 import pytest
 
 from stock_signal.__main__ import main

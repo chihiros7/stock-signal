@@ -5,6 +5,7 @@
 - [設計ドキュメント一覧](docs/Home.md)
 - [開発環境の設計](docs/Development-Environment.md)
 - [実装ロードマップ](docs/Implementation-Roadmap.md)
+- [自動テスト・CI/CD計画](docs/Testing-and-CI.md)
 
 ## ローカル開発（Windows + WSL2 Ubuntu + Docker）
 
@@ -41,7 +42,19 @@ Codexの認証データはDockerの名前付きボリューム `stock-signal-cod
 
 VS Codeの「実行とデバッグ」で **Debug stock-signal (dry run)** を選択し `F5`。テストのデバッグは **Debug pytest** を選択します。
 
-現在の `stock_signal` は**環境確認用の最小プログラム**です。株価取得、CSV解析、Discord通知は未実装で、`DRY_RUN=false` は安全のため例外で停止します。
+現在の起動コマンドは**環境確認用の最小プログラム**です。円建て評価計算は `stock_signal/valuation.py` に実装し、架空データでテストしています。株価取得、CSV解析、Discord通知は未実装で、`DRY_RUN=false` は安全のため例外で停止します。
+
+### 自動テスト・CI
+
+mainへのpush・PR・手動実行で、Ruffとネットワーク接続禁止のpytestを実行します。本番の認証情報や実CSVは使用しません。
+
+```bash
+python -m ruff check stock_signal tests
+python -m ruff format --check stock_signal tests
+python -m pytest --cov --cov-report=term
+```
+
+CIから本番へ自動デプロイは行いません。段階的な導入計画は [自動テスト・CI/CD計画](docs/Testing-and-CI.md) を参照してください。
 
 ### 秘密情報とCSV
 

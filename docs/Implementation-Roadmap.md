@@ -4,6 +4,15 @@
 
 ## 段階的な開発計画
 
+自動テスト・CI/CDは [Testing-and-CI](Testing-and-CI.md) に沿って各Phaseで整備する。CIを早期に導入し、本番の定期バッチ・デプロイは後半で別ワークフローとして追加する。
+
+### 現在の進捗
+
+- Phase 1：開発コンテナでPython 3.12・Codex・debugpy・pytestを確認済み。VS Code上のブレークポイント停止は手動確認が残る。
+- CI：Ruff、書式検査、ネットワーク禁止のpytestを実装。mainへのpush・PR・手動実行で検証する。本番の送信・削除・デプロイは行わない。
+- Phase 2：Decimalによる円建て評価計算と架空データのテストを実装済み。株価取得先の選定・実データ確認・休場日と分割の処理は未完了。
+- Phase 3以降：未実装。原本CSVはローカルの `tmp/` のみで扱い、実保有情報をGitへ転記しない。
+
 ```mermaid
 flowchart LR
   A["Phase 1<br/>WSL2 + Docker + Codex<br/>pytest/debugpy"] --> B["Phase 2<br/>株価取得・損益計算"]
@@ -16,7 +25,7 @@ flowchart LR
 
 | Phase | 目標 | 完了条件 |
 | --- | --- | --- |
-| 1 | WSL2 Ubuntu、Docker Dev Container、Codex、VS Codeデバッグ | コンテナ起動・Codex認証・pytest・ブレークポイント動作 |
+| 1 | WSL2 Ubuntu、Docker Dev Container、Codex、VS Codeデバッグ・CI | コンテナ起動・Codex認証・pytest・ブレークポイント動作・CI成功 |
 | 2 | 日本株の株価・前日終値取得、評価計算 | モックと実データで計算を検証、失敗時も誤表示しない |
 | 3 | 楽天・SBIのCSV解析 | **匿名化した実CSV**を基に文字コード・口座区分・例外をテスト |
 | 4 | Discordチャンネル連携 | 本人ID照合、通知、エラー処理、削除候補の安全確認 |
