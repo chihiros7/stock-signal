@@ -1,0 +1,4 @@
+# Development-verified market-data adapter; production data licensing is pending.
+exchange-calendars==4.13.2
+pandas==3.1.1
+yfinance==1.8.0

@@ -1,4 +1,5 @@
-# Development-only dependencies. Runtime dependencies will be added as features are implemented.
+-r requirements.txt
+# Development-only tools.
 pytest==9.2.0
 debugpy==1.8.22
 ruff==0.17.5
