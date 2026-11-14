@@ -44,7 +44,7 @@
 ## 検証と反映
 
 - 共通コマンド：`python -m ruff check stock_signal tests`、`python -m ruff format --check stock_signal tests`、`python -m pytest --cov --cov-report=term`。
-- Phase 2時点は91件成功。開発用中継・会話再接続の追加後はローカルで122件成功。GitHub CIは本体への反映後に確認する。再開時はActionsで対象コミットの結果も確認する。
+- 開発用中継・会話再接続の追加後、ローカルで122件成功。実装コミット `b386a1b` の [GitHub CI](https://github.com/chihiros7/stock-signal/actions/runs/43542163428) も成功。再開時は最新コミットの結果も確認する。
 - Wikiは別のGitリポジトリ。本体のdocsから `.md` を外したページリンクへ変換して同期する。`AGENTS.md` の参照は本体GitHubへのリンクに置換する。ローカル作業場所は `/tmp/stock-signal-wiki-publish`（存在しなければ再取得）。
 - 本体・Wikiともにpush前に対象差分・全送信コミット・公開禁止情報の混入を確認する。Gitの著者にはGitHubの非公開用メールを使う。
 
