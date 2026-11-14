@@ -34,6 +34,8 @@ flowchart LR
 | [Registration-Design](Registration-Design.md) | `/登録` による専用チャンネル作成・登録台帳 |
 | [Testing-and-CI](Testing-and-CI.md) | 自動テスト・CI/CDの段階的導入 |
 | [Market-Data](Market-Data.md) | 開発用株価取得・取引日・欠損・分割の検証 |
+| [Discord-Dev-Bridge](Discord-Dev-Bridge.md) | スマホから開発用Codexへ指示するための設定 |
+| [Development-Handoff](Development-Handoff.md) | 再開時の決定事項・実装状況・次の作業 |
 | [System-Architecture](System-Architecture.md) | システム構成・責務・データ境界 |
 | [Development-Environment](Development-Environment.md) | WSL2 / Ubuntu / Docker / Codex / VS Code |
 | [Processing-Flow](Processing-Flow.md) | CSV検証、計算、通知、削除の処理フロー |

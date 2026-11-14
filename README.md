@@ -6,6 +6,8 @@
 - [開発環境の設計](docs/Development-Environment.md)
 - [実装ロードマップ](docs/Implementation-Roadmap.md)
 - [自動テスト・CI/CD計画](docs/Testing-and-CI.md)
+- [スマホのDiscordから開発指示](docs/Discord-Dev-Bridge.md)
+- [開発引き継ぎメモ](docs/Development-Handoff.md)
 
 ## ローカル開発（Windows + WSL2 Ubuntu + Docker）
 
